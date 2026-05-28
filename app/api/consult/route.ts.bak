@@ -1,6 +1,8 @@
 import { streamText } from "ai";
 import { createDeepSeek } from "@ai-sdk/deepseek";
 
+export const dynamic = "force-static";
+
 const deepseek = createDeepSeek({
   apiKey: process.env.DEEPSEEK_API_KEY ?? "",
 });
