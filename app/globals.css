@@ -1,26 +1,29 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-warm-bg: #f2ede4;
+  --color-warm-card: #faf7f2;
+  --color-warm-border: #e0d9cd;
+  --color-warm-accent: #8b5a2b;
+  --color-warm-accent-light: #d4b896;
+  --color-warm-text: #1a1410;
+  --color-warm-text-dim: #8a7e72;
+  --color-warm-dark: #2a2218;
+  --color-warm-gold: #c4a87a;
+  --font-family-serif: "Playfair Display", Georgia, serif;
+  --font-family-brush: "Ma Shan Zheng", cursive;
+  --font-family-sans: system-ui, -apple-system, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-warm-bg);
+  color: var(--color-warm-text);
+  font-family: system-ui, -apple-system, sans-serif;
 }
