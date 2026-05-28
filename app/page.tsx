@@ -1,14 +1,19 @@
 import HeroSection from "@/components/HeroSection";
 import MarqueeStrip from "@/components/MarqueeStrip";
+import ProductShowcase from "@/components/ProductShowcase";
+import EditorialSection from "@/components/EditorialSection";
+import TestimonialGrid from "@/components/TestimonialGrid";
+import SocialStrip from "@/components/SocialStrip";
 
 export default function HomePage() {
   return (
     <>
       <HeroSection />
       <MarqueeStrip />
-      <div className="text-center py-20 text-warm-text-dim text-sm">
-        更多内容正在施工中...
-      </div>
+      <ProductShowcase />
+      <EditorialSection />
+      <TestimonialGrid />
+      <SocialStrip />
     </>
   );
 }
