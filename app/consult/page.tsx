@@ -1,34 +1,72 @@
 "use client";
 
-import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport } from "ai";
-import type { UIMessage } from "ai";
 import { useState, useRef, useEffect } from "react";
 
-function getMessageText(m: UIMessage): string {
-  return m.parts
-    .filter((p) => p.type === "text")
-    .map((p) => p.text)
-    .join("");
+interface Message {
+  role: "user" | "assistant";
+  content: string;
 }
 
 export default function ConsultPage() {
   const [mode, setMode] = useState<"select" | "chat">("select");
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
-  const { messages, sendMessage, status } = useChat({
-    transport: new DefaultChatTransport({ api: "/api/consult" }),
-  });
+  const [streaming, setStreaming] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const isStreaming = status === "streaming" || status === "submitted";
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSend = () => {
-    if (!input.trim() || isStreaming) return;
-    sendMessage({ text: input.trim() });
+  const handleSend = async () => {
+    if (!input.trim() || streaming) return;
+
+    const userMsg: Message = { role: "user", content: input.trim() };
+    setMessages((prev) => [...prev, userMsg]);
     setInput("");
+    setStreaming(true);
+
+    try {
+      const response = await fetch("/api/consult", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: [...messages, userMsg].map((m) => ({
+            role: m.role,
+            content: m.content,
+          })),
+        }),
+      });
+
+      if (!response.ok) throw new Error("API error");
+
+      const reader = response.body?.getReader();
+      if (!reader) throw new Error("No readable stream");
+
+      const decoder = new TextDecoder();
+      let assistantContent = "";
+
+      setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        assistantContent += chunk;
+        setMessages((prev) => {
+          const updated = [...prev];
+          updated[updated.length - 1] = { role: "assistant", content: assistantContent };
+          return updated;
+        });
+      }
+    } catch (err) {
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: "抱歉，出了点问题，请稍后再试。" },
+      ]);
+    } finally {
+      setStreaming(false);
+    }
   };
 
   if (mode === "select") {
@@ -70,7 +108,7 @@ export default function ConsultPage() {
           <h1 className="font-serif italic text-2xl text-warm-text">润大夫</h1>
           <p className="text-xs text-warm-text-dim">AI 宠物健康顾问</p>
         </div>
-        <button onClick={() => setMode("select")} className="text-xs text-warm-text-dim hover:text-warm-accent">
+        <button onClick={() => { setMode("select"); setMessages([]); }} className="text-xs text-warm-text-dim hover:text-warm-accent">
           ← 返回
         </button>
       </div>
@@ -84,21 +122,21 @@ export default function ConsultPage() {
           </div>
         )}
 
-        {messages.map((m: UIMessage) => (
-          <div key={m.id} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+        {messages.map((m, i) => (
+          <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
             <div
-              className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
+              className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
                 m.role === "user"
                   ? "bg-warm-accent text-white rounded-br-md"
                   : "bg-warm-border/30 text-warm-text rounded-bl-md"
               }`}
             >
-              {getMessageText(m)}
+              {m.content}
             </div>
           </div>
         ))}
 
-        {isStreaming && (
+        {streaming && messages[messages.length - 1]?.content === "" && (
           <div className="flex justify-start">
             <div className="bg-warm-border/30 px-4 py-2.5 rounded-2xl rounded-bl-md text-sm text-warm-text-dim">
               润大夫正在思考...
@@ -110,10 +148,7 @@ export default function ConsultPage() {
       </div>
 
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSend();
-        }}
+        onSubmit={(e) => { e.preventDefault(); handleSend(); }}
         className="flex gap-3"
       >
         <input
@@ -121,10 +156,11 @@ export default function ConsultPage() {
           onChange={(e) => setInput(e.target.value)}
           placeholder="描述宠物的症状、行为、饮食情况..."
           className="flex-1 px-4 py-2.5 bg-warm-card border border-warm-border rounded-full text-sm focus:outline-none focus:border-warm-accent"
+          disabled={streaming}
         />
         <button
           type="submit"
-          disabled={isStreaming || !input.trim()}
+          disabled={streaming || !input.trim()}
           className="px-5 py-2.5 bg-warm-accent text-white rounded-full text-sm hover:bg-warm-accent/80 disabled:opacity-50 transition-colors"
         >
           发送

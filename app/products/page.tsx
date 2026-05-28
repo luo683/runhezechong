@@ -51,7 +51,7 @@ export default function ProductsPage() {
       ) : (
         <div className="grid grid-cols-4 gap-5">
           {filtered.map((p, i) => (
-            <ProductCard key={p.slug} product={p} index={i} />
+            <ProductCard key={p.slug} product={p} />
           ))}
         </div>
       )}
