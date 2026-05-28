@@ -49,7 +49,7 @@ export default function ProductsPage() {
       {filtered.length === 0 ? (
         <p className="text-center text-warm-text-dim py-16">该分类暂无产品</p>
       ) : (
-        <div className="grid grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {filtered.map((p, i) => (
             <ProductCard key={p.slug} product={p} />
           ))}

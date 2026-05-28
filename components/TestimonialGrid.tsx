@@ -8,7 +8,7 @@ export default function TestimonialGrid() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="max-w-6xl mx-auto px-10 py-32">
+    <section ref={ref} className="max-w-6xl mx-auto px-10 py-20 lg:py-32">
       <motion.div
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
@@ -18,7 +18,7 @@ export default function TestimonialGrid() {
           They Said
         </span>
 
-        <blockquote className="font-serif italic text-6xl leading-[1.2] text-warm-text max-w-3xl mb-10 border-none p-0 m-0">
+        <blockquote className="font-serif italic text-3xl sm:text-4xl lg:text-6xl leading-[1.2] text-warm-text max-w-full lg:max-w-3xl mb-10 border-none p-0 m-0">
           "换了润禾泽宠之后，
           <br />
           <span className="text-warm-accent">我家猫的毛</span>

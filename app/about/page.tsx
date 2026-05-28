@@ -1,11 +1,11 @@
 export default function AboutPage() {
   return (
-    <div className="max-w-4xl mx-auto px-10 py-20">
+    <div className="max-w-4xl mx-auto px-5 sm:px-10 py-12 lg:py-20">
       <span className="text-xs tracking-[0.2em] uppercase text-warm-accent">About</span>
-      <h1 className="font-serif italic text-4xl text-warm-text mt-3 mb-16">关于润禾泽宠</h1>
+      <h1 className="font-serif italic text-2xl lg:text-4xl text-warm-text mt-3 mb-16">关于润禾泽宠</h1>
 
       <section className="mb-20">
-        <h2 className="font-serif italic text-2xl text-warm-text mb-4">源于热爱，成于专业</h2>
+        <h2 className="font-serif italic text-xl lg:text-2xl text-warm-text mb-4">源于热爱，成于专业</h2>
         <p className="text-sm text-warm-text-dim leading-relaxed">
           润禾泽宠诞生于一个简单信念：宠物是家人，它们值得和我们吃的一样好。
           创始人团队由兽医和营养学研究者组成，我们拒绝让宠物的饭碗里出现任何我们自己都看不懂的成分。
@@ -13,7 +13,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mb-20">
-        <h2 className="font-serif italic text-2xl text-warm-text mb-4">药食同源，就是我们最大的诚意</h2>
+        <h2 className="font-serif italic text-xl lg:text-2xl text-warm-text mb-4">药食同源，就是我们最大的诚意</h2>
         <p className="text-sm text-warm-text-dim leading-relaxed mb-4">
           润禾泽宠所有产品使用的中草药成分，全部来自国家药食同源目录——山药、茯苓、枸杞、山楂、
           黑芝麻、菊花、蒲公英、桑葚、百合、薏苡仁……这些你厨房里就有的食材。
@@ -26,7 +26,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mb-20">
-        <h2 className="font-serif italic text-2xl text-warm-text mb-4">兽医联合研发</h2>
+        <h2 className="font-serif italic text-xl lg:text-2xl text-warm-text mb-4">兽医联合研发</h2>
         <p className="text-sm text-warm-text-dim leading-relaxed">
           每一款配方都与执业兽医师联合开发，确保符合猫狗的真实营养需求。
           我们不凭空想象配方，每一个成分的选择都有科学依据和临床验证。
@@ -34,7 +34,7 @@ export default function AboutPage() {
       </section>
 
       <section>
-        <h2 className="font-serif italic text-2xl text-warm-text mb-8">品牌历程</h2>
+        <h2 className="font-serif italic text-xl lg:text-2xl text-warm-text mb-8">品牌历程</h2>
         <div className="space-y-6">
           {[
             { year: "2023", event: "创始团队组建，启动配方研发" },

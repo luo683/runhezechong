@@ -25,7 +25,7 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          "sticky top-4 z-50 mx-auto w-full max-w-3xl",
+          "sticky top-4 z-50 mx-auto w-full max-w-[95vw] lg:max-w-3xl",
           "rounded-2xl border border-warm-border/50",
           "bg-warm-card/80 backdrop-blur-xl",
           "shadow-[0_4px_24px_rgba(0,0,0,0.04)]",
@@ -38,7 +38,7 @@ export default function Navbar() {
             className="flex items-center gap-2 rounded-xl px-2 py-1.5 hover:bg-warm-border/30 transition-colors"
           >
             <Sprout className="size-5 text-warm-accent" />
-            <span className="font-semibold text-base text-warm-text tracking-wide">
+            <span className="hidden sm:inline font-semibold text-base text-warm-text tracking-wide">
               润禾泽宠
             </span>
           </Link>

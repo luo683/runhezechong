@@ -25,8 +25,8 @@ export default function ProductDetailPage() {
         ← 返回产品列表
       </Link>
 
-      <div className="grid grid-cols-2 gap-16 mt-8">
-        <div className="h-96 bg-warm-card border border-warm-border rounded-2xl flex items-center justify-center text-7xl">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mt-8">
+        <div className="h-64 lg:h-96 bg-warm-card border border-warm-border rounded-2xl flex items-center justify-center text-7xl">
           🐾
         </div>
 
@@ -34,7 +34,7 @@ export default function ProductDetailPage() {
           <span className="text-xs tracking-[0.2em] uppercase text-warm-accent">
             {product.tags.join(" · ")}
           </span>
-          <h1 className="font-serif italic text-4xl text-warm-text mt-3 mb-4">{product.name}</h1>
+          <h1 className="font-serif italic text-2xl lg:text-4xl text-warm-text mt-3 mb-4">{product.name}</h1>
           <p className="text-2xl font-medium text-warm-accent mb-6">¥{product.price}</p>
 
           <div className="mb-6">

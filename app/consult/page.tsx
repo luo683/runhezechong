@@ -104,7 +104,7 @@ export default function ConsultPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-10 py-6 h-[calc(100vh-110px)] flex flex-col">
+    <div className="max-w-2xl mx-auto px-4 sm:px-10 py-6 h-[calc(100vh-130px)] lg:h-[calc(100vh-110px)] flex flex-col">
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="font-serif italic text-2xl text-warm-text">润大夫</h1>

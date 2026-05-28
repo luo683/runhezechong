@@ -19,7 +19,7 @@ export default function ContactPage() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <div className="max-w-4xl mx-auto px-10 py-20" ref={ref}>
+    <div className="max-w-4xl mx-auto px-10 py-12 lg:py-20" ref={ref}>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -37,7 +37,7 @@ export default function ContactPage() {
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="grid grid-cols-2 gap-4"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-4"
       >
         {contactItems.map((item, i) => (
           <motion.div
@@ -87,7 +87,7 @@ export default function ContactPage() {
         className="mt-12 text-center"
       >
         <p className="text-xs text-warm-text-dim mb-4">扫码添加客服微信</p>
-        <div className="w-40 h-40 mx-auto bg-warm-card border border-warm-border rounded-2xl flex items-center justify-center text-sm text-warm-text-dim">
+        <div className="w-32 h-32 sm:w-40 sm:h-40 mx-auto bg-warm-card border border-warm-border rounded-2xl flex items-center justify-center text-sm text-warm-text-dim">
           二维码占位
         </div>
         <p className="text-xs text-warm-text-dim mt-3">微信号：{contactInfo.wechat}</p>

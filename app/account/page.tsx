@@ -30,8 +30,8 @@ export default function AccountPage() {
     <div className="max-w-3xl mx-auto px-10 py-16">
       <h1 className="font-serif italic text-3xl text-warm-text mb-10">我的账户</h1>
 
-      <div className="grid grid-cols-[200px_1fr] gap-10">
-        <div className="space-y-1">
+      <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-10">
+        <div className="flex lg:block gap-2 lg:space-y-1 overflow-x-auto">
           {["个人信息", "我的订单", "会员权益", "退出登录"].map((tab) => (
             <button
               key={tab}

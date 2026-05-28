@@ -31,19 +31,19 @@ export default function ProductShowcase() {
             initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: i * 0.12 }}
-            className={`group border-t border-warm-border py-10 flex items-center gap-8 ${
-              i % 2 === 1 ? "flex-row-reverse" : ""
+            className={`group border-t border-warm-border py-6 sm:py-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 ${
+              i % 2 === 1 ? "sm:flex-row-reverse" : ""
             }`}
           >
             {/* 图形 */}
-            <Link href={`/products/${p.slug}`} className="w-32 h-32 shrink-0 bg-gradient-to-br from-warm-accent/5 to-warm-border/20 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+            <Link href={`/products/${p.slug}`} className="w-20 h-20 sm:w-32 sm:h-32 shrink-0 bg-gradient-to-br from-warm-accent/5 to-warm-border/20 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
               <div className="w-16 h-16 bg-gradient-to-br from-warm-accent/15 to-warm-accent/5 rounded-full" />
             </Link>
 
             {/* 信息 */}
             <div className="flex-1 min-w-0">
               <Link href={`/products/${p.slug}`}>
-                <h3 className="font-serif italic text-2xl text-warm-text mb-1 group-hover:text-warm-accent transition-colors">
+                <h3 className="font-serif italic text-xl sm:text-2xl text-warm-text mb-1 group-hover:text-warm-accent transition-colors">
                   {p.name}
                 </h3>
               </Link>

@@ -29,7 +29,7 @@ export default function SplashScreen() {
             ]}
             morphTime={1.2}
             cooldownTime={0.3}
-            textClassName="font-brush text-5xl md:text-7xl"
+            textClassName="font-brush text-3xl sm:text-5xl md:text-7xl"
             className="h-32"
           />
 
@@ -38,7 +38,7 @@ export default function SplashScreen() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 0.6 }}
             exit={{ opacity: 0 }}
-            className="font-serif italic text-lg text-warm-text-dim mt-8"
+            className="font-serif italic text-base sm:text-lg text-warm-text-dim mt-8"
           >
             Herbal nutrition, honest love.
           </motion.p>

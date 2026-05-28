@@ -5,15 +5,15 @@ import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[600px] flex items-center bg-gradient-to-b from-[#ede6d9] via-[#ede6d9] to-warm-bg overflow-hidden">
+    <section className="relative min-h-[500px] lg:min-h-[600px] flex items-center bg-gradient-to-b from-[#ede6d9] via-[#ede6d9] to-warm-bg overflow-hidden">
       {/* 背景纹理 — 大圆 */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-warm-accent/5" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-warm-accent/8" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] lg:w-[600px] lg:h-[600px] rounded-full border border-warm-accent/5" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] lg:w-[400px] lg:h-[400px] rounded-full border border-warm-accent/8" />
 
       <div className="max-w-6xl mx-auto px-10 w-full">
-        <div className="grid grid-cols-[1.3fr_0.7fr] gap-0 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-0 items-center">
           {/* 左 */}
-          <div className="relative z-10 py-20">
+          <div className="relative z-10 py-12 lg:py-20">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -23,19 +23,19 @@ export default function HeroSection() {
                 药食同源 · 草本养护
               </span>
 
-              <h1 className="font-brush text-8xl leading-[1.05] text-warm-text mb-6 tracking-wide">
+              <h1 className="font-brush text-5xl lg:text-8xl leading-[1.05] text-warm-text mb-6 tracking-wide">
                 润养本草
                 <br />
                 <span className="text-warm-accent">恩泽爱宠</span>
               </h1>
 
-              <p className="font-serif italic text-2xl text-warm-text-dim/60 mb-10">
+              <p className="font-serif italic text-lg lg:text-2xl text-warm-text-dim/60 mb-10">
                 Herbal nutrition,
                 <br />
                 honest love.
               </p>
 
-              <p className="text-sm text-warm-text-dim/70 leading-relaxed mb-10 max-w-sm">
+              <p className="text-sm text-warm-text-dim/70 leading-relaxed mb-10 max-w-full lg:max-w-sm">
                 全部使用药食同源食材，日常食用级安全标准。
                 不做宠物爱吃的垃圾食品，只做它们身体真正需要的。
               </p>
@@ -55,7 +55,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.3 }}
-            className="relative flex items-center justify-center"
+            className="relative hidden lg:flex items-center justify-center"
           >
             <div className="w-72 h-72 bg-gradient-to-br from-warm-accent/8 to-warm-accent/3 rounded-full flex items-center justify-center">
               <div className="w-48 h-48 bg-gradient-to-br from-warm-accent/15 to-warm-accent/5 rounded-full flex items-center justify-center">

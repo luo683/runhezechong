@@ -35,7 +35,7 @@ export default function CheckoutPage() {
     <div className="max-w-3xl mx-auto px-10 py-16">
       <h1 className="font-serif italic text-3xl text-warm-text mb-10">结算</h1>
 
-      <div className="grid grid-cols-[1fr_300px] gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-6 lg:gap-12">
         <div>
           <h2 className="text-sm font-medium text-warm-text mb-4">收货信息</h2>
           <div className="space-y-3">

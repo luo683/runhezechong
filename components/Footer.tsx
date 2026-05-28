@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="bg-warm-dark text-warm-text-dim">
-      <div className="max-w-6xl mx-auto px-10 py-14 grid grid-cols-3 gap-12">
+      <div className="max-w-6xl mx-auto px-5 sm:px-10 py-14 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12">
         <div>
           <h5 className="text-warm-gold text-xs tracking-[0.15em] uppercase mb-4">润禾泽宠</h5>
           <p className="text-sm leading-relaxed">
@@ -26,7 +26,7 @@ export default function Footer() {
           <p className="text-sm">hello@runhezechong.cn</p>
         </div>
       </div>
-      <div className="border-t border-white/10 max-w-6xl mx-10 py-5 flex justify-between text-xs">
+      <div className="border-t border-white/10 max-w-6xl mx-5 sm:mx-10 py-5 flex flex-col sm:flex-row gap-2 justify-between text-xs">
         <span>&copy; 2026 润禾泽宠</span>
         <span>隐私政策 · 服务条款 · 配送说明</span>
       </div>

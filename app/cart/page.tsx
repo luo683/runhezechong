@@ -8,7 +8,7 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div className="max-w-2xl mx-auto px-10 py-32 text-center">
+      <div className="max-w-2xl mx-auto px-10 py-20 lg:py-32 text-center">
         <h1 className="font-serif italic text-3xl text-warm-text mb-4">购物车是空的</h1>
         <p className="text-warm-text-dim mb-8">去给毛孩子挑点好东西吧</p>
         <Link href="/products" className="text-sm px-6 py-2 bg-warm-accent text-white rounded-full hover:bg-warm-accent/80 transition-colors">
@@ -19,12 +19,12 @@ export default function CartPage() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-10 py-16">
+    <div className="max-w-full mx-auto px-4 sm:max-w-3xl sm:px-10 py-16">
       <h1 className="font-serif italic text-3xl text-warm-text mb-10">购物车</h1>
 
       <div className="space-y-4 mb-8">
         {items.map((item) => (
-          <div key={item.product.slug} className="flex items-center gap-5 bg-warm-card border border-warm-border rounded-xl p-4">
+          <div key={item.product.slug} className="flex flex-wrap sm:flex-nowrap items-center gap-5 bg-warm-card border border-warm-border rounded-xl p-4">
             <div className="w-20 h-20 bg-warm-border/40 rounded-lg flex items-center justify-center text-2xl shrink-0">🐾</div>
             <div className="flex-1">
               <h3 className="font-medium text-warm-text">{item.product.name}</h3>
