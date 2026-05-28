@@ -2,99 +2,72 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { fadeInUp, fadeIn } from "@/lib/animations";
 
 export default function HeroSection() {
   return (
-    <section className="relative grid grid-cols-2 min-h-[550px] bg-gradient-to-br from-[#ede6d9] to-[#e0d4be] overflow-hidden">
-      {/* Decorative circle */}
-      <motion.div
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 0.06 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute -top-40 -right-20 w-[500px] h-[500px] rounded-full bg-warm-accent"
-      />
+    <section className="relative min-h-[600px] flex items-center bg-gradient-to-b from-[#ede6d9] via-[#ede6d9] to-warm-bg overflow-hidden">
+      {/* 背景纹理 — 大圆 */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-warm-accent/5" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-warm-accent/8" />
 
-      <div className="flex flex-col justify-center px-16 py-20 relative z-10">
-        <motion.span
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          custom={0}
-          className="text-xs tracking-[0.3em] uppercase text-warm-accent mb-6 border border-warm-accent-light/40 rounded-full px-4 py-1.5 w-fit"
-        >
-          药食同源 · 日常养护
-        </motion.span>
+      <div className="max-w-6xl mx-auto px-10 w-full">
+        <div className="grid grid-cols-[1.3fr_0.7fr] gap-0 items-center">
+          {/* 左 */}
+          <div className="relative z-10 py-20">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="text-[10px] tracking-[0.4em] uppercase text-warm-accent/70 mb-8 block">
+                药食同源 · 草本养护
+              </span>
 
-        <motion.h1
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className="font-brush text-7xl leading-tight text-warm-text mb-4 tracking-[0.05em]"
-        >
-          <motion.span
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="block"
+              <h1 className="font-brush text-8xl leading-[1.05] text-warm-text mb-6 tracking-wide">
+                润养本草
+                <br />
+                <span className="text-warm-accent">恩泽爱宠</span>
+              </h1>
+
+              <p className="font-serif italic text-2xl text-warm-text-dim/60 mb-10">
+                Herbal nutrition,
+                <br />
+                honest love.
+              </p>
+
+              <p className="text-sm text-warm-text-dim/70 leading-relaxed mb-10 max-w-sm">
+                全部使用药食同源食材，日常食用级安全标准。
+                不做宠物爱吃的垃圾食品，只做它们身体真正需要的。
+              </p>
+
+              <Link
+                href="/products"
+                className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-warm-text group"
+              >
+                <span className="w-8 h-px bg-warm-accent/40 group-hover:w-12 transition-all" />
+                探索产品
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* 右 — 大图形 */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.3 }}
+            className="relative flex items-center justify-center"
           >
-            润养本草
-          </motion.span>
-          <motion.span
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="block"
-          >
-            恩泽爱宠
-          </motion.span>
-        </motion.h1>
-
-        <motion.p
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          custom={2}
-          className="font-serif italic text-2xl text-warm-text-dim mb-6"
-        >
-          Herbal nutrition, honest love.
-        </motion.p>
-
-        <motion.p
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          custom={3}
-          className="text-base leading-relaxed text-warm-text-dim mb-8 max-w-md"
-        >
-          以传统本草智慧为根基，用现代营养科学为每一只毛孩子打造真正健康的日常饮食。
-        </motion.p>
-
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          custom={4}
-        >
-          <Link
-            href="/products"
-            className="inline-flex items-center gap-2 text-xs tracking-[0.15em] uppercase text-warm-text border-b-2 border-warm-accent pb-1.5 w-fit hover:text-warm-accent transition-colors"
-          >
-            探索产品 →
-          </Link>
-        </motion.div>
+            <div className="w-72 h-72 bg-gradient-to-br from-warm-accent/8 to-warm-accent/3 rounded-full flex items-center justify-center">
+              <div className="w-48 h-48 bg-gradient-to-br from-warm-accent/15 to-warm-accent/5 rounded-full flex items-center justify-center">
+                <div className="w-24 h-24 bg-warm-accent/20 rounded-full" />
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, x: 60 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.9, delay: 0.5, ease: "easeOut" }}
-        className="flex items-center justify-center relative"
-      >
-        <div className="w-80 h-80 bg-warm-card rounded-3xl flex items-center justify-center text-7xl shadow-2xl shadow-warm-accent/5 rotate-1">
-          🐾
-        </div>
-      </motion.div>
+      {/* 底部渐变过渡 */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-warm-bg" />
     </section>
   );
 }

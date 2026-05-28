@@ -15,7 +15,9 @@ export default function Footer() {
           <h5 className="text-warm-gold text-xs tracking-[0.15em] uppercase mb-4">产品</h5>
           <Link href="/products" className="block text-sm mb-2 hover:text-white transition-colors">全部产品</Link>
           <Link href="/consult" className="block text-sm mb-2 hover:text-white transition-colors">AI 问诊</Link>
+          <Link href="/membership" className="block text-sm mb-2 hover:text-white transition-colors">加入会员</Link>
           <Link href="/about" className="block text-sm mb-2 hover:text-white transition-colors">关于我们</Link>
+          <Link href="/contact" className="block text-sm mb-2 hover:text-white transition-colors">联系我们</Link>
         </div>
         <div>
           <h5 className="text-warm-gold text-xs tracking-[0.15em] uppercase mb-4">关注我们</h5>

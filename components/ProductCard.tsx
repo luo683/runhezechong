@@ -4,25 +4,23 @@ import Link from "next/link";
 import { Product } from "@/types";
 import AddToCart from "./AddToCart";
 
-const emojiMap: Record<string, string> = {
-  digestion: "🍚", urinary: "💧", immunity: "🛡️", skincoat: "✨", oral: "🦷", calming: "🌿", teardrop: "👁️",
-};
-
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="group bg-warm-card border border-warm-border rounded-2xl overflow-hidden hover:border-warm-accent hover:shadow-xl hover:shadow-warm-accent/5 transition-all duration-500 hover:-translate-y-1">
+    <div className="group">
       <Link href={`/products/${product.slug}`}>
-        <div className="h-48 bg-gradient-to-b from-warm-border/20 to-warm-border/40 flex items-center justify-center text-5xl group-hover:scale-110 transition-transform duration-500">
-          {emojiMap[product.slug] || "🐾"}
+        <div className="aspect-[4/3] bg-gradient-to-br from-warm-accent/5 to-warm-border/20 rounded-2xl flex items-center justify-center mb-4 group-hover:from-warm-accent/10 group-hover:to-warm-accent/5 transition-all duration-500">
+          <div className="w-16 h-16 bg-gradient-to-br from-warm-accent/20 to-warm-accent/5 rounded-full group-hover:scale-110 transition-transform duration-500" />
         </div>
       </Link>
-      <div className="p-5">
+      <div>
         <Link href={`/products/${product.slug}`}>
-          <h3 className="font-medium text-warm-text mb-1 group-hover:text-warm-accent transition-colors">{product.name}</h3>
+          <h3 className="font-serif italic text-lg text-warm-text mb-1 group-hover:text-warm-accent transition-colors">
+            {product.name}
+          </h3>
         </Link>
-        <p className="text-xs text-warm-text-dim mb-3 line-clamp-2">{product.effects.join(" · ")}</p>
+        <p className="text-xs text-warm-text-dim/60 mb-3">{product.effects[0]}</p>
         <div className="flex items-center justify-between">
-          <span className="text-base font-medium text-warm-accent">¥{product.price}</span>
+          <span className="text-sm font-medium text-warm-text">¥{product.price}</span>
           <AddToCart product={product} />
         </div>
       </div>

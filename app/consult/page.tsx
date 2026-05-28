@@ -12,10 +12,12 @@ export default function ConsultPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
   }, [messages]);
 
   const handleSend = async () => {
@@ -102,7 +104,7 @@ export default function ConsultPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-10 py-12">
+    <div className="max-w-2xl mx-auto px-10 py-6 h-[calc(100vh-110px)] flex flex-col">
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="font-serif italic text-2xl text-warm-text">润大夫</h1>
@@ -113,7 +115,10 @@ export default function ConsultPage() {
         </button>
       </div>
 
-      <div className="bg-warm-card border border-warm-border rounded-2xl p-6 min-h-[400px] max-h-[500px] overflow-y-auto mb-4 space-y-4">
+      <div
+        ref={chatContainerRef}
+        className="bg-warm-card border border-warm-border rounded-2xl p-6 flex-1 overflow-y-auto mb-4 space-y-4"
+      >
         {messages.length === 0 && (
           <div className="text-center text-warm-text-dim text-sm py-16">
             <p className="text-3xl mb-3">🐾</p>
@@ -144,7 +149,6 @@ export default function ConsultPage() {
           </div>
         )}
 
-        <div ref={messagesEndRef} />
       </div>
 
       <form

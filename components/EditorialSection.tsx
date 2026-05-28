@@ -9,38 +9,62 @@ export default function EditorialSection() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="border-t border-warm-border mx-10 max-w-6xl xl:mx-auto">
-      <div className="grid grid-cols-[1.1fr_0.9fr] gap-16 py-24 items-center">
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
-          <span className="text-xs tracking-[0.2em] uppercase text-warm-accent">Our Philosophy</span>
-          <h2 className="font-serif italic text-4xl text-warm-text mt-3 mb-5 leading-snug">
-            如果配料表上有你不认识的词，<br />
-            <span className="text-warm-accent">你的宠物也不应该认识。</span>
-          </h2>
-          <p className="text-sm text-warm-text-dim leading-relaxed mb-6">
-            全部使用药食同源目录品种——山药、茯苓、枸杞、山楂……这些你厨房里就有的食材。
-            我们不做宠物爱吃的垃圾食品，只做它们身体真正需要的日常养护。
-          </p>
-          <Link href="/about" className="text-xs tracking-[0.15em] uppercase text-warm-accent border-b border-warm-accent pb-1 hover:text-warm-accent/70 transition-colors">
-            了解我们的故事 →
-          </Link>
-        </motion.div>
+    <section ref={ref} className="bg-warm-dark text-white overflow-hidden">
+      <div className="max-w-6xl mx-auto px-10 py-32">
+        <div className="grid grid-cols-[1fr_1fr] gap-20 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7 }}
+          >
+            <span className="text-[10px] tracking-[0.4em] uppercase text-warm-gold/60 mb-6 block">
+              Philosophy
+            </span>
+            <h2 className="font-serif italic text-5xl leading-[1.15] text-white mb-8">
+              如果配料表上
+              <br />
+              有你不认识的词，
+              <br />
+              <span className="text-warm-gold">你的宠物</span>
+              <br />
+              <span className="text-warm-gold">也不应该认识。</span>
+            </h2>
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-warm-gold/70 hover:text-warm-gold transition-colors"
+            >
+              <span className="w-8 h-px bg-warm-gold/30" />
+              了解我们的故事
+            </Link>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="relative"
-        >
-          <div className="h-96 bg-gradient-to-br from-warm-border/50 to-warm-border/20 rounded-3xl flex items-center justify-center text-6xl -rotate-1 shadow-lg" />
-          {/* Overlap accent */}
-          <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-warm-accent/5 rounded-2xl -z-10" />
-          <div className="absolute -top-4 -right-4 w-20 h-20 bg-warm-accent/8 rounded-full -z-10" />
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-sm text-white/50 leading-relaxed space-y-4"
+          >
+            <p>
+              全部使用药食同源目录品种——山药、茯苓、枸杞、山楂……这些你厨房里就有的食材。
+              我们不凭空想象配方，每一个成分的选择都有科学依据和临床验证。
+            </p>
+            <p>
+              我们相信，真正的营养不应该来自各种化学添加剂，而应该来自大自然已经准备好的东西。
+              用传统本草智慧做基础，用现代营养科学做验证。
+            </p>
+            {/* 装饰数字 */}
+            <div className="pt-8 flex gap-12">
+              <div>
+                <span className="font-serif italic text-4xl text-warm-gold">7</span>
+                <span className="block text-xs text-white/30 mt-1">款核心配方</span>
+              </div>
+              <div>
+                <span className="font-serif italic text-4xl text-warm-gold">5000+</span>
+                <span className="block text-xs text-white/30 mt-1">只猫狗已验证</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
