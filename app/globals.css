@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
-
 @theme inline {
   --color-warm-bg: #f2ede4;
   --color-warm-card: #faf7f2;
