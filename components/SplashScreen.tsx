@@ -19,29 +19,36 @@ export default function SplashScreen() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-warm-bg"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center"
+          style={{ background: "linear-gradient(135deg, #e8dfd0 0%, #dfd3c0 100%)" }}
         >
-          <GooeyText
-            texts={[
-              "欢迎来到 润禾泽宠",
-              "润养本草 恩泽爱宠",
-              "药食同源 日常养护",
-            ]}
-            morphTime={1.2}
-            cooldownTime={0.3}
-            textClassName="font-brush text-3xl sm:text-5xl md:text-7xl"
-            className="h-32"
-          />
+          {/* SSR 时立即可见的品牌文字 */}
+          <h1 className="font-brush text-5xl sm:text-6xl md:text-8xl text-warm-text tracking-wide mb-6">
+            润禾泽宠
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 0.6 }}
-            exit={{ opacity: 0 }}
-            className="font-serif italic text-base sm:text-lg text-warm-text-dim mt-8"
-          >
+          <p className="font-serif italic text-lg sm:text-xl text-warm-text-dim/60">
             Herbal nutrition, honest love.
-          </motion.p>
+          </p>
+
+          {/* JS 加载后 GooeyText 覆盖在上面做动画 */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <GooeyText
+              texts={[
+                "欢迎来到 润禾泽宠",
+                "润养本草 恩泽爱宠",
+                "药食同源 日常养护",
+              ]}
+              morphTime={1.2}
+              cooldownTime={0.3}
+              textClassName="font-brush text-3xl sm:text-5xl md:text-7xl"
+              className="h-32"
+            />
+          </div>
+
+          <p className="font-serif italic text-base sm:text-lg text-warm-text-dim/40 mt-8 relative z-10">
+            药食同源 日常养护
+          </p>
         </motion.div>
       )}
     </AnimatePresence>
