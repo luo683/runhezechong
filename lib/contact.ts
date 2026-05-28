@@ -6,6 +6,10 @@ export const contactInfo = {
   wechatMp: "润禾泽宠",
   // 小红书
   xiaohongshu: "@润禾泽宠",
+  // 抖音
+  douyin: "@润禾泽宠",
+  // 淘宝店铺
+  taobao: "润禾泽宠旗舰店",
   // 客服邮箱
   email: "hello@runhezechong.cn",
   // 客服电话

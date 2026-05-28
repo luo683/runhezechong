@@ -16,12 +16,15 @@ export default function Footer() {
           <Link href="/products" className="block text-sm mb-2 hover:text-white transition-colors">全部产品</Link>
           <Link href="/consult" className="block text-sm mb-2 hover:text-white transition-colors">AI 问诊</Link>
           <Link href="/membership" className="block text-sm mb-2 hover:text-white transition-colors">加入会员</Link>
+          <Link href="/reviews" className="block text-sm mb-2 hover:text-white transition-colors">用户评价</Link>
           <Link href="/about" className="block text-sm mb-2 hover:text-white transition-colors">关于我们</Link>
           <Link href="/contact" className="block text-sm mb-2 hover:text-white transition-colors">联系我们</Link>
         </div>
         <div>
           <h5 className="text-warm-gold text-xs tracking-[0.15em] uppercase mb-4">关注我们</h5>
           <p className="text-sm mb-2">小红书 @润禾泽宠</p>
+          <p className="text-sm mb-2">抖音 @润禾泽宠</p>
+          <p className="text-sm mb-2">淘宝 润禾泽宠旗舰店</p>
           <p className="text-sm mb-2">微信公众号</p>
           <p className="text-sm">hello@runhezechong.cn</p>
         </div>

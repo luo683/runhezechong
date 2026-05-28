@@ -1,0 +1,28 @@
+import { prisma } from "@/lib/prisma";
+import bcrypt from "bcryptjs";
+import { NextResponse } from "next/server";
+
+export async function POST(req: Request) {
+  try {
+    const { name, email, password } = await req.json();
+
+    if (!email || !password) {
+      return NextResponse.json({ error: "邮箱和密码不能为空" }, { status: 400 });
+    }
+
+    const existing = await prisma.user.findUnique({ where: { email } });
+    if (existing) {
+      return NextResponse.json({ error: "该邮箱已注册" }, { status: 400 });
+    }
+
+    const hashed = await bcrypt.hash(password, 12);
+
+    const user = await prisma.user.create({
+      data: { name: name || "毛孩子家长", email, password: hashed },
+    });
+
+    return NextResponse.json({ id: user.id, email: user.email });
+  } catch {
+    return NextResponse.json({ error: "注册失败，请稍后重试" }, { status: 500 });
+  }
+}
