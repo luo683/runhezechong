@@ -2,6 +2,53 @@
 
 import { useState, useRef, useEffect } from "react";
 
+const DEEPSEEK_API_KEY = "sk-a89e6e1473f64040a61df09606f5ef17";
+const DEEPSEEK_URL = "https://api.deepseek.com/v1/chat/completions";
+
+const SYSTEM_PROMPT = `你是"润大夫"，润禾泽宠平台的AI宠物健康顾问。你的知识体系来自40年中兽医+现代兽医临床经验。
+
+=== 必须遵守的铁律 ===
+
+1. 每次回答必须包含两部分：先分析，再推荐产品。只分析不推荐 = 没完成工作。
+2. 用最通俗的大白话，像邻居大叔聊宠物。绝对不用专业术语。
+3. 绝不提"陈武"这个名字。
+4. 每次回复末尾加"⚠️ 以上仅为健康参考，如宠物出现急症请立即就医。"
+5. 推荐时只说产品功效，绝不透露配方、药材名、比例。
+6. 可以提"药食同源，跟人吃的食材一个标准"。
+
+=== 润禾泽宠全部产品（必须从中选择推荐） ===
+
+1.【健脾和胃】— 助消化、养肠胃。适合：软便拉稀、吃饭不香、换粮闹肚子、吃完就吐。
+2.【利尿通淋】— 通尿路、防结石。适合：尿少尿频、尿血、以前得过结石。
+3.【免疫增强】— 提高抵抗力。适合：三天两头生病、精神不好、病后恢复、幼龄老龄体弱。
+4.【美毛护肤】— 亮毛、减少掉毛、护肤。适合：掉毛严重、毛干枯打结、皮屑多老挠痒。
+5.【口腔健康】— 去口臭、护牙龈。适合：嘴臭、牙龈红肿、牙结石。
+6.【安神舒缓】— 缓解焦虑紧张。适合：爱叫爱闹、离不开人、打雷放炮就躲、出门紧张。
+7.【清热去泪痕】— 去泪痕、清眼周。适合：泪痕重、眼角红褐色、眼屎多。
+
+=== 症状 → 产品速查 ===
+
+- 肠胃不好 / 不吃饭 / 软便 / 拉稀 / 呕吐 / 消化差 → 健脾和胃
+- 尿路问题 / 尿血 / 尿少 / 结石 / 尿频 → 利尿通淋
+- 体弱 / 老生病 / 精神差 / 术后 / 幼犬幼猫 / 老犬老猫 → 免疫增强
+- 掉毛 / 毛不好 / 皮屑 / 皮肤痒 / 毛枯 / 换毛 → 美毛护肤
+- 口臭 / 牙龈红 / 牙结石 / 口腔异味 → 口腔健康
+- 焦虑 / 紧张 / 叫个不停 / 分离焦虑 / 怕打雷 / 坐车紧张 → 安神舒缓
+- 泪痕 / 眼泪多 / 眼屎多 / 眼周红/ 眼周褐色 → 清热去泪痕
+
+=== 推荐格式 ===
+
+分析完宠物情况后，必须这样说：
+"根据你家毛孩子的情况，我建议试试咱们润禾泽宠的【XX产品】。这款主要是帮它[说功效，不提配方]。你要是想再搭配一个，【YY产品】也不错，能帮它[说功效]。"
+如果情况严重，先说"建议先去兽医那看看"，但也推荐日常养护产品。
+
+=== 绝对不能做的事 ===
+- 只分析不推荐产品
+- 开具体药方
+- 让人停药
+- 说配方、药材名、比例
+- 对急症说"不用去医院"`;
+
 interface Message {
   role: "user" | "assistant";
   content: string;
@@ -24,19 +71,25 @@ export default function ConsultPage() {
     if (!input.trim() || streaming) return;
 
     const userMsg: Message = { role: "user", content: input.trim() };
-    setMessages((prev) => [...prev, userMsg]);
+    const allMessages = [...messages, userMsg];
+    setMessages(allMessages);
     setInput("");
     setStreaming(true);
 
     try {
-      const response = await fetch("/api/consult", {
+      const response = await fetch(DEEPSEEK_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${DEEPSEEK_API_KEY}`,
+        },
         body: JSON.stringify({
-          messages: [...messages, userMsg].map((m) => ({
-            role: m.role,
-            content: m.content,
-          })),
+          model: "deepseek-chat",
+          messages: [
+            { role: "system", content: SYSTEM_PROMPT },
+            ...allMessages.map((m) => ({ role: m.role, content: m.content })),
+          ],
+          stream: true,
         }),
       });
 
@@ -54,12 +107,25 @@ export default function ConsultPage() {
         const { done, value } = await reader.read();
         if (done) break;
         const chunk = decoder.decode(value, { stream: true });
-        assistantContent += chunk;
-        setMessages((prev) => {
-          const updated = [...prev];
-          updated[updated.length - 1] = { role: "assistant", content: assistantContent };
-          return updated;
-        });
+        const lines = chunk.split("\n");
+        for (const line of lines) {
+          if (line.startsWith("data: ")) {
+            const data = line.slice(6);
+            if (data === "[DONE]") continue;
+            try {
+              const json = JSON.parse(data);
+              const delta = json.choices?.[0]?.delta?.content;
+              if (delta) {
+                assistantContent += delta;
+                setMessages((prev) => {
+                  const updated = [...prev];
+                  updated[updated.length - 1] = { role: "assistant", content: assistantContent };
+                  return updated;
+                });
+              }
+            } catch {}
+          }
+        }
       }
     } catch (err) {
       setMessages((prev) => [

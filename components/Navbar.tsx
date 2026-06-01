@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
 import { useCartStore } from "@/store/cart";
 import { Sprout, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { useState, useEffect } from "react";
 
 const links = [
   { href: "/products", label: "产品" },
@@ -18,7 +17,6 @@ const links = [
 ];
 
 export default function Navbar() {
-  const { data: session } = useSession();
   const totalItems = useCartStore((s) => s.totalItems);
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
@@ -71,21 +69,12 @@ export default function Navbar() {
               )}
             </Link>
 
-            {session?.user ? (
-              <>
-                <span className="text-sm text-warm-text-dim">{session.user.name || session.user.email}</span>
-                <button onClick={() => signOut({ callbackUrl: "/" })} className="text-sm text-warm-text-dim hover:text-warm-text transition-colors">
-                  退出
-                </button>
-              </>
-            ) : (
-              <Link
-                href="/account"
-                className="px-4 py-1.5 rounded-lg text-sm bg-warm-accent text-white hover:bg-warm-accent/80 transition-colors"
-              >
-                登录
-              </Link>
-            )}
+            <Link
+              href="/account"
+              className="px-4 py-1.5 rounded-lg text-sm bg-warm-accent text-white hover:bg-warm-accent/80 transition-colors"
+            >
+              登录
+            </Link>
 
             {/* Mobile Menu Button */}
             <button
@@ -150,22 +139,13 @@ export default function Navbar() {
                 >
                   购物车
                 </Link>
-                {session?.user ? (
-                  <button
-                    onClick={() => { signOut({ callbackUrl: "/" }); setOpen(false); }}
-                    className="flex-1 py-2 rounded-lg text-center text-sm border border-warm-border text-warm-text-dim hover:bg-warm-border/20 transition-colors"
-                  >
-                    退出
-                  </button>
-                ) : (
-                  <Link
-                    href="/account"
-                    onClick={() => setOpen(false)}
-                    className="flex-1 py-2 rounded-lg text-center text-sm bg-warm-accent text-white hover:bg-warm-accent/80 transition-colors"
-                  >
-                    登录
-                  </Link>
-                )}
+                <Link
+                  href="/account"
+                  onClick={() => setOpen(false)}
+                  className="flex-1 py-2 rounded-lg text-center text-sm bg-warm-accent text-white hover:bg-warm-accent/80 transition-colors"
+                >
+                  登录
+                </Link>
               </div>
             </motion.div>
           </>

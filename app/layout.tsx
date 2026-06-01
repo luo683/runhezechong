@@ -3,7 +3,6 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SplashScreen from "@/components/SplashScreen";
-import SessionProvider from "@/components/SessionProvider";
 
 const fontUrl =
   "https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap";
@@ -23,11 +22,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-warm-bg text-warm-text font-sans">
         <SplashScreen />
-        <SessionProvider>
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-        </SessionProvider>
+        <Navbar />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
       </body>
     </html>
   );
