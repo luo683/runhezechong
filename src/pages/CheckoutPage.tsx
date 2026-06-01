@@ -2,19 +2,16 @@ import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
 import { useCartStore } from '../stores/useCartStore';
-import { useAuthStore } from '../stores/useAuthStore';
 import { useOrderStore } from '../stores/useOrderStore';
 import { products } from '../data/products';
 import { Input } from '../components/ui/Input';
 import { Modal } from '../components/ui/Modal';
 import { Breadcrumb } from '../components/ui/Breadcrumb';
-import { Button } from '../components/ui/Button';
 
 const emptyAddress = { name: '', phone: '', province: '', city: '', district: '', detail: '' };
 
 export function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCartStore();
-  const user = useAuthStore((s) => s.user);
   const placeOrder = useOrderStore((s) => s.placeOrder);
   const navigate = useNavigate();
   const [address, setAddress] = useState(emptyAddress);

@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
-import { CATEGORIES, type Category } from '../types';
-import { getProductsByCategory, products } from '../data/products';
+import { CATEGORIES } from '../types';
+import { getProductsByCategory } from '../data/products';
 import { ProductCard } from '../components/ui/ProductCard';
 import { EmptyState } from '../components/ui/EmptyState';
 

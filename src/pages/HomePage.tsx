@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Dog, Cat, Bone, ToyBone } from 'lucide-react';
+import { ArrowRight, Dog, Cat, Bone } from 'lucide-react';
 import { getFeaturedProducts, products } from '../data/products';
 import { ProductCard } from '../components/ui/ProductCard';
 import { CATEGORIES } from '../types';
@@ -9,7 +9,7 @@ const categoryIcons: Record<Category, typeof Dog> = {
   'dog-food': Dog,
   'cat-food': Cat,
   'snacks': Bone,
-  'supplies': ToyBone,
+  'supplies': Bone,
 };
 
 export function HomePage() {
